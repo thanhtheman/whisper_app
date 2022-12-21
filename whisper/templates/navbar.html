@@ -1,4 +1,24 @@
 {% load static %}
-<div>
-    <img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo">
+<div class="navbar">
+    <img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo">
+    <ul class="nav-menu">
+        <li class="nav-item">
+           <a href="#" class="nav-link">About Whisper</a> 
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">My Account</a> 
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">Log In/Out</a> 
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link">Contact</a> 
+        </li>        
+    </ul>
+
+    <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </div>
 </div>
