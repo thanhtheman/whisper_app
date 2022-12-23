@@ -1,7 +1,23 @@
 {% extends 'main.html' %}
+{% load static %}
+{% block extrahead %} 
+<link rel="stylesheet" href="{% static 'styles/home.css' %}" />
+{% endblock %}
+
 {% block content %}
+<div class="hero">
+    <h1 class="hero__slogan">Be Your Own Biggest Fan</h1>
+    <img src="{% static 'dev_images/hero.svg' %}" alt="hero_image" class="hero__image">
+    <p class="hero__introduction">Auto-messaging motivational system</p>
+    <button class="hero__button">Try Whisper Free</button>
+    <div class="hero__quotes">
+        <h2>Quotes Scrolling</h2>
+    </div>
 
-<h1> Welcome to my profile</h1>
-
-{% endblock content %}  
+    <h2 class="hero__description-image1">Quote image 1</h2>
+    <h2 class="hero__description-1">Quote Description 1</h2>
+    <h2 class="hero__description-2">Quote Description 2</h2>
+    <h2 class="hero__description-image2">Quote image 1</h2>
+</div>
+{% endblock content %}
 

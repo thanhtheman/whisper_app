@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+/* Nav Bar & Hamburger Menu Styling */
 .navbar {
     display: flex;
     justify-content: space-between;

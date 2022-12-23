@@ -6,13 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'styles/main.css' %}" />
+    {% block extrahead %} {% endblock %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
     <script src="{% static 'js/navbar.js' %}" defer></script>
     <title>Whisper</title>
 </head>
 <body>
     {% include 'navbar.html' %}
     {% block content %}
-
+    
     {% endblock content %}
 </body>
 </html>
