@@ -1,6 +1,10 @@
 from django.shortcuts import render
 
-# Create your views here.
-def get_profiles(request):
-    context = {'name': 'Thanh Quach'}
+quotes = {
+    'quote': 'The way to get started is to quit talking and start doing.',
+    'author': 'Walt Disney'
+}
+
+def home(request):
+    context = quotes
     return render(request, 'profiles/profiles.html', context)
