@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<h1>This is Quote data</h1>
+<p> Contetn is: {{ quote.content }}</p>
+<p> {{ quote.description }}</p>
+{% for tag in quote.scheduling_time.all %}
+<p> Scheduling time is: {{ tag.time_tag }}</p>
+{% endfor %}
+{% endblock content %}
