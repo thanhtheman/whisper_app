@@ -11,6 +11,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=200, blank=True, null=True)
     profile_image = models.ImageField(blank=True, null=True, upload_to='images/', default='dev_images/message.svg')
     headline = models.CharField(max_length=200, blank=True, null=True)
+    phone_number = models.IntegerField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

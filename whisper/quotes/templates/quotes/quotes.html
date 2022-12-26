@@ -1,11 +1,25 @@
 {% extends 'main.html' %}
 {% load static %}
+{% block extrahead%}
+<script src="{% url 'js-catlog' %}"></script>
+<script src="{% static '/admin/js/core.js' %}"></script>
+<link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+<link rel="stylesheet" href="{% static 'admin/css/widgets.css' %}">
+{% endblock %}
 {% block content %}
 
 <h1>This is Quote data</h1>
 <p> Contetn is: {{ quote.content }}</p>
 <p> {{ quote.description }}</p>
-{% for tag in quote.scheduling_time.all %}
-<p> Scheduling time is: {{ tag.time_tag }}</p>
-{% endfor %}
+
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token%}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit" value="submit"/>
+</form>
+
+
+
 {% endblock content %}
