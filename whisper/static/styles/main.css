@@ -4,6 +4,14 @@
     box-sizing: border-box;
 }
 
+.required-field {
+    background-color: #ff7369;
+    text-align: left;
+}
+
+.form-author {
+    background-color: aquamarine;
+}
 /* Nav Bar & Hamburger Menu Styling */
 .navbar {
     display: flex;

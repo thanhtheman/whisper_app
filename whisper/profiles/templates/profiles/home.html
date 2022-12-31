@@ -1,0 +1,72 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-block align-items-center">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 text-center">Be Your Own Biggest Fan</div>
+        <div class="col-2"></div>
+    </div>
+    <div class="row p-3">
+        <!-- <div class="col-1"></div> -->
+        <div class="col-12 text-center">
+            <img src="{% static 'dev_images/hero.svg' %}" alt="hero_image" class="img-fluid max-width: 100%">
+        </div>
+        <!-- <div class="col-1"></div> -->
+    </div>
+    <div class="row p-1">
+        <div class="col-3"></div>
+        <div class="col-6 text-center">
+            <p class="fw-bold text-secondary">Auto-messaging motivation system</p>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row pt-2 pb-4">
+        <div class="col-3"></div>
+        <div class="col-6 text-center">
+            <a href="#" class="btn text-white text-nowrap rounded-pill" style="background-color: #ff7369;">
+                <p class="fs-6 fw-light fst-italic m-0">Try Whisper Free</p>
+            </a>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+    <div class="row p-2">
+        <div class="col-2 col-lg-4"></div>
+        <div class="col-8 col-lg-4">
+            <blockquote class="blockquote text-center fs-6 fst-italic">
+                {{ quote }}
+            </blockquote>
+            <figcaption class="blockquote-footer text-end">
+                {{ author }}
+            </figcaption>
+        </div>
+        <div class="col-2 col-lg-4"></div>
+    </div>
+
+    <div class="row p-2 d-flex flex-row justify-content-center align-items-center ">
+        <div class="col-4 col-lg-2">
+            <img src="{% static 'dev_images/message.svg' %}" alt="hero_message_image" class="img-fluid max-width: 100%">
+        </div>
+        <div class="col-8 col-lg-4">
+            <p class="text-secondary text-wrap m-0 fs-6">Reading a quote somewhere that you resonate with? Pick your quotes and set schedule.</p>
+        </div>
+    </div>
+    <div class="row p-2 d-flex flex-row justify-content-center align-items-center ">
+        <div class="col-8 col-lg-4">
+            <p class="text-secondary text-start m-0 fs-6">
+                <span style="color: #ff7369">Whisper</span> will text you those words of wisdom, as reminders,
+                to empower you to move forward and achieve your goals. 
+            </p>
+        </div>
+        <div class="col-4 col-lg-2">
+            <img src="{% static 'dev_images/phone.svg' %}" alt="hero_phone_image" class="img-fluid max-width: 100%">
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

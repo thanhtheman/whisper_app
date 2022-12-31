@@ -7,4 +7,4 @@ quotes = {
 
 def home(request):
     context = quotes
-    return render(request, 'profiles/profiles.html', context)
+    return render(request, 'profiles/home.html', context)

@@ -1,12 +1,14 @@
 from django.forms import ModelForm
 from .models import Quote
-from django.contrib.admin.widgets import AdminDateWidget, AdminTimeWidget, AdminSplitDateTime
+from django import forms
 
 class QuoteForm(ModelForm):
+    content = forms.CharField(widget=forms.Textarea(attrs={"rows": 3}))
+    description = forms.CharField(widget=forms.Textarea(attrs={"rows": 3, "placeholder": "please write something my friend"}))
     class Meta:
         model = Quote
-        fields = ['content', 'author', 'description', 'date', 'time']
-        widgets = {
-            'date': AdminDateWidget(),
-            'time': AdminTimeWidget(),
-        }
+        fields = ['owner','content', 'author', 'description', 'date', 'time']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        print(self.fields)
