@@ -1,30 +1,26 @@
-from django.shortcuts import render
-from .models import Quote
+from django.shortcuts import render, redirect
+from .models import Schedule
 from .forms import QuoteForm
 from pytz import timezone
-import datetime
-from whisper import settings
+
 # Create your views here.
 
 
-def create_quotes (request):
-    quote = Quote.objects.first()
+def create_quote (request): 
+    form = QuoteForm()
     if request.method == "POST":
+        print(request.POST)
         form = QuoteForm(request.POST)
         if form.is_valid():
-            form.save()
-            print(request.POST['date'])
-            print(request.POST['time'])
-            # user_timezone = datetime.datetime(2022, 12, 26)
-            # time_zone = user_timezone.tzinfo
-            # conversion = user_timezone.astimezone(timezone(settings.TIME_ZONE))
-            # print(time_zone)
-            # print(conversion)
+            quote = form.save()
+            if request.POST['date_time']:
+                Schedule.objects.create(
+                    time_tag = request.POST['date_time'], 
+                    quote_owner = quote)
+            return redirect('profiles')
         else:
-            print(form.errors)
-    
-    form = QuoteForm
-    context = {'quote': quote, 'form': form}
+            print(form.errors)  
+    context = {'form': form}
     return render(request, 'quotes/quotes.html', context)
 
 

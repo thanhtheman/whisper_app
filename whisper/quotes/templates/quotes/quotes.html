@@ -1,22 +1,46 @@
 {% extends 'main.html' %}
 {% load static %}
-{% load tz %} <!--this is for timezone--> 
-{% get_current_timezone as TIME_ZONE %} <!--this is for timezone--> 
-{% block extrahead%}
+{% block extrahead %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_red.css">
 {% endblock %}
 
 {% block content %}
+<div class="container p-3">
+    <div class="row">
+        <div class="col-2">image</div>
+    </div>
+</div>
 
-<h1>This is Quote data</h1>
-<p> Contetn is: {{ quote.content }}</p>
-<p> {{ quote.description }}</p>
-
-
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data" class="container p-3">
     {% csrf_token%}
-    {{ form.media }}
-    {{ form.as_p }}
-    <input type="submit" value="submit"/>
+    {% for field in form %}
+        <label for="formInput#text" class="form-label"> {{ field.label }}</label>
+        {{ field }}
+    {% endfor %}
+    <div class="d-flex justify-content-center">
+        <input type="submit" class="btn my-4 px-4 text-white fs-6 fw-light rounded-pill" value="Submit" style="background-color:#ff7369;"/>
+    </div>
+    
 </form>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    config_time = {
+
+        enableTime: true,
+        minDate: "today",
+        dateFormat: "Y-m-d H:i",
+        time_24hr: true,
+        altInput: true,
+        altFormat: "F j, Y (h:i K)",
+    }
+
+    flatpickr("#datetimepicker", config_time);
+</script>
+
 
 {% endblock content %}
