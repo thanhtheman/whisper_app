@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+{% if page == 'user_registration' %}
+<h1>Register Now</h1>
+<form action="{% url 'user_registration' %}" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="empty">
+            <label for="formInput#text"> {{ field.label }} </label>
+            {{ field }} 
+        </div>
+        {% for error in field.errors %}
+        <p style="color: red;"> {{ error }} </p>
+        {% endfor %}
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
+
+
+
+<h1>Already have an account?</h1>
+<a href="{% url 'login' %}"> Log In</a>
+
+{% else %}
+<h1>Log in Now </h1>
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <label for="formImput#text" class="empty">Username: </label>
+    <input type="text" name="username" class="empty"/>
+    <label for="formImput#text" class="empty">Password: </label>
+    <input type="password" name="password" class="empty"/>
+    <input class="" type="submit" value="Log In" />
+</form>
+
+<h1>Don't have an account?</h1>
+<a href="{% url 'user_registration' %}">Register Now</a>
+{% endif %}
+{% endblock content %}
