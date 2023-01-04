@@ -1,24 +1,24 @@
 {% load static %}
 <div class="navbar">
-    <a href="#"><img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo"></a>
+    <a href="{% url 'profiles' %}"><img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo"></a>
     <ul class="nav-menu">
         <li class="nav-item">
-           <a href="#" class="nav-link">About Whisper</a> 
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">My Account</a> 
+           <a href="#" class="menu-link">About Whisper</a> 
         </li>
         {% if user.is_authenticated %}
         <li class="nav-item">
-            <a href="{% url 'logout' %}" class="nav-link">Log Out</a> 
+            <a href="{% url 'profiles' %}" class="menu-link">My Account</a> 
+        </li>
+        <li class="nav-item">
+            <a href="{% url 'logout' %}" class="menu-link">Log Out</a> 
         </li>
         {% else %}
         <li class="nav-item">
-            <a href="{% url 'login' %}" class="nav-link">Log In</a> 
+            <a href="{% url 'login' %}" class="menu-link">Log In</a> 
         </li>
         {% endif %}
         <li class="nav-item">
-            <a href="#" class="nav-link">Contact</a> 
+            <a href="#" class="menu-link">Contact</a> 
         </li>        
     </ul>
 

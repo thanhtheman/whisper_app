@@ -4,14 +4,40 @@
     box-sizing: border-box;
 }
 
-.required-field {
-    background-color: #ff7369;
-    text-align: left;
+/*Wording animation */
+.wrapper {
+    display: inline-flex;
 }
 
-.form-author {
-    background-color: aquamarine;
+
+.dynamic-txts{
+    font-weight: 500;
+    color: #ff7369;
 }
+
+.dynamic-txts span {
+    position: relative;
+    font-weight: 500;
+}
+
+.dynamic-txts span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background:white;
+    border-left: 2px solid #ff7369;
+    animation: typing 4s steps(20) infinite;
+}
+
+@keyframes typing {
+    100%{
+        left: 100%;
+        margin: 0 -5px 0 5px;
+    }
+}
+
 /* Nav Bar & Hamburger Menu Styling */
 .navbar {
     display: flex;
@@ -30,7 +56,6 @@ li {
 }
 
 a {
-    color: grey;
     text-decoration: none;
     opacity: none;
 }
@@ -42,14 +67,15 @@ a {
     gap: 100px;
 }
 
-.nav-link {
+.menu-link {
     transition: 0.3s ease;
     color: #ff7369;
+    text-decoration: none;
     
 }
 
 .nav-link:hover {
-    color: #ff7369;
+    color: rebeccapurple;
 }
 
 .hamburger{
@@ -99,6 +125,7 @@ a {
         border: 2px;
         border-style: dotted;
         border-color: #ff7369;
+        z-index: 99;
 
     }
 

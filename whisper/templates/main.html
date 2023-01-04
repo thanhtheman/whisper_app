@@ -22,9 +22,9 @@
     {% include 'navbar.html' %}
     {% if messages %}
     {% for message in messages %}
-        <div class="alert alert--{{message.tags}}">
-            <p class="alert__message">{{ message }}</p>
-            <button class="alert__close">⨯</button>
+        <div class="d-flex justify-content-center align-items-center">
+            <p id="alert" class="alert alert-light" style="color: #ff7369;">{{ message }}</p>
+            <button class="btn bg-danger mb-3" id="alert__close"><i class="bi bi-x text-white"></i></button>
         </div>
     {% endfor %}
     {% endif %}

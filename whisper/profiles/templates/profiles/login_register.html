@@ -3,38 +3,114 @@
 
 {% block content %}
 {% if page == 'user_registration' %}
-<h1>Register Now</h1>
-<form action="{% url 'user_registration' %}" method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-        <div class="empty">
-            <label for="formInput#text"> {{ field.label }} </label>
-            {{ field }} 
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo">
         </div>
-        {% for error in field.errors %}
-        <p style="color: red;"> {{ error }} </p>
-        {% endfor %}
-    {% endfor %}
-    <input type="submit" value="Submit">
-</form>
-
-
-
-<h1>Already have an account?</h1>
-<a href="{% url 'login' %}"> Log In</a>
+    </div>
+  
+    <form action="{% url 'user_registration' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            {% for field in form %}
+                <div class="row text-start px-5">
+                    <div class="col-lg-4"></div>
+                    <div class="col-12 col-lg-4">
+                        <label for="formInput#text" class="form-label pt-2 pb-1 ps-2 px-0 m-0" style="font-size: 0.75em"> {{ field.label }} </label>
+                    </div>
+                    <div class="col-lg-4"></div>  
+                </div>
+                <div class="row text-start px-5 d-flex flex-row justify-content-center">
+                    <div class="col-lg-4"></div>
+                    <div class="col-12 col-lg-4">{{ field }}</div>
+                    <div class="col-lg-4"></div>
+                </div>
+                {% for error in field.errors %}
+                <p style="color: red;"> {{ error }} </p>
+                {% endfor %}
+            {% endfor %}
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4 text-center py-3">
+                    <input type="submit" class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;" value="Sign up">
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-12 col-lg-4 text-center py-2">
+            <h6 class="fs6">Already have an account?</h6>
+            <div class="d-flex flex-row justify-content-evenly">
+                <a href="{% url 'login' %}" style="text-decoration: none; color:#ff7369">Log In</a>
+                <a href="{% url 'login' %}" style="text-decoration: none; color: #ff7369;">Forget Password?</a>
+            </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>    
+</div>
 
 {% else %}
-<h1>Log in Now </h1>
-<form action="{% url 'login' %}" method="POST">
-    {% csrf_token %}
-    <label for="formImput#text" class="empty">Username: </label>
-    <input type="text" name="username" class="empty"/>
-    <label for="formImput#text" class="empty">Password: </label>
-    <input type="password" name="password" class="empty"/>
-    <input class="" type="submit" value="Log In" />
-</form>
 
-<h1>Don't have an account?</h1>
-<a href="{% url 'user_registration' %}">Register Now</a>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo">
+        </div>
+    </div>
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <div class="row text-start px-5">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4">
+                    <label for="formInput#text" class="form-label pt-2 pb-1 ps-2 px-0 m-0" style="font-size: 0.75em">Username</label>
+                </div>
+                <div class="col-lg-4"></div>  
+            </div>
+            <div class="row text-start px-5">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4">
+                    <input type="text" name="username" class="bg-light rounded-pill form-control px-0.5 text-dark" style="font-size: 0.75em"/>
+                </div>
+                <div class="col-lg-4"></div>  
+            </div>
+            <div class="row text-start px-5">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4">
+                    <label for="formInput#text" class="form-label pt-2 pb-1 ps-2 px-0 m-0" style="font-size: 0.75em">Password</label>
+                </div>
+                <div class="col-lg-4"></div>  
+            </div>
+            <div class="row text-start px-5">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4">
+                    <input type="password" name="password" class="bg-light rounded-pill form-control px-0.5 text-dark" style="font-size: 0.75em"/>
+                </div>
+                <div class="col-lg-4"></div>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-12 col-lg-4 text-center py-3">
+                <input type="submit" class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;" value="Log in">
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-12 col-lg-4 text-center py-2">
+            <h6 class="fs6">Don't have an account?</h6>
+            <div class="d-flex flex-row justify-content-center">
+                <a href="{% url 'user_registration' %}" style="text-decoration: none; color:#ff7369">Register Now</a>
+            </div>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>    
+</div>
 {% endif %}
+
 {% endblock content %}
