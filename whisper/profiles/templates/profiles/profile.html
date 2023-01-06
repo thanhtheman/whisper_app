@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class="col-2"><img src="{% static 'images/profile_picture.jpg' %}" alt="profile_picture" class="img-fluid"></div>
+            <div class="col-10 text-secondary h1">Hello Thanh <i class="bi bi-lightbulb" style="color: #ff7369;"></i></div>
+        </div>
+        <div class="d-flex flex-row justify-content-center mt-3">
+            <a href="">
+                <div class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;">
+                    Create
+                </div>
+            </a>
+        </div>
+        <div class="row mt-3">
+            <div class="col lead fs-2 fw-bold" style="color: #ff7369;">Your Quotes</div>
+        </div>
+    </div>
+    <!-- We will create a loop to output each quote-->
+    <a href="{% url 'home' %}" class="m-1" style="text-decoration: none;">
+        <div class="container bg-light border border-danger rounded">
+            <div class="row mx-2 mt-2 mb-1">
+                <div class="col-lg-2"></div>
+                <div class="col col-lg-6 text-secondary" > 
+                    <blockquote class="blockquote text-start" style="font-size: 0.85rem;">
+                        The best way to predict the future is to create it. Stop talking, start doing!
+                    </blockquote>
+                    <figcaption class="blockquote-footer text-end" style="font-size: 0.85rem;">
+                        Walt Disney
+                    </figcaption>
+                </div>
+                <div class="col-2 col-lg-2"><i class="bi bi-pen" style="color: #ff7369;"></i></div>
+            </div>
+            <div class="row my-1 mx-2">
+                <div class="col-lg-2"></div>
+                <div class="col col-lg-6 fst-italic" style="color: #ff7369; font-size: 0.85rem;">January 15, 2023 @ 7pm</div>
+            </div>
+        </div>
+    </a>
+    <!-- end of a loop to output each quote-->
+</div>
+
+
+
+{% endblock content %}

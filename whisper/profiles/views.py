@@ -13,6 +13,10 @@ def home(request):
     return render(request, 'profiles/home.html', context)
 
 
+def profile (request):
+    context = {'profile': 'thanh quach'}
+    return render(request, 'profiles/profile.html', context)
+
 def login_user(request):
     page = 'login'
     if request.user.is_authenticated:
@@ -26,7 +30,7 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            return redirect('profiles')
+            return redirect('home')
         else:
             messages.error(request, 'Username or Password is incorrect!')
     context = {'page': page}
@@ -35,7 +39,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.info(request,'You have successfully logged out.')
-    return redirect('profiles')
+    return redirect('home')
 
 def register_user(request):
     page = 'user_registration'
@@ -49,7 +53,7 @@ def register_user(request):
             user.save()
             messages.success(request, 'Your account has been successfully created!')
             login(request, user)
-            return redirect('profiles')
+            return redirect('home')
         else:
             messages.error(request, "An error has occured, please check username & password requirements.")
     context = {'form': form, 'page': page}

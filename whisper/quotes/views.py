@@ -17,7 +17,7 @@ def create_quote (request):
                 Schedule.objects.create(
                     time_tag = request.POST['date_time'], 
                     quote_owner = quote)
-            return redirect('profiles')
+            return redirect('home')
         else:
             print(form.errors)  
     context = {'form': form}
