@@ -19,7 +19,7 @@ class Quote(models.Model):
         return self.content
     
     class Meta:
-        ordering =['created']
+        ordering =['-created']
 
 class Schedule(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)

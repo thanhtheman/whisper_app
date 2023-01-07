@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row d-flex align-items-center">
             <div class="col-2"><img src="{% static 'images/profile_picture.jpg' %}" alt="profile_picture" class="img-fluid"></div>
-            <div class="col-10 text-secondary h1">Hello Thanh <i class="bi bi-lightbulb" style="color: #ff7369;"></i></div>
+            <div class="col-10 text-secondary h2">Hello {{ profile.username }} <i class="bi bi-lightbulb" style="color: #ff7369;"></i></div>
         </div>
         <div class="d-flex flex-row justify-content-center mt-3">
             <a href="">
@@ -21,29 +21,32 @@
         </div>
     </div>
     <!-- We will create a loop to output each quote-->
+    {% for quote in results_per_page %}
     <a href="{% url 'home' %}" class="m-1" style="text-decoration: none;">
         <div class="container bg-light border border-danger rounded">
             <div class="row mx-2 mt-2 mb-1">
                 <div class="col-lg-2"></div>
                 <div class="col col-lg-6 text-secondary" > 
                     <blockquote class="blockquote text-start" style="font-size: 0.85rem;">
-                        The best way to predict the future is to create it. Stop talking, start doing!
+                        {{ quote.content }}
                     </blockquote>
                     <figcaption class="blockquote-footer text-end" style="font-size: 0.85rem;">
-                        Walt Disney
+                        {{ quote.author }}
                     </figcaption>
                 </div>
                 <div class="col-2 col-lg-2"><i class="bi bi-pen" style="color: #ff7369;"></i></div>
             </div>
             <div class="row my-1 mx-2">
                 <div class="col-lg-2"></div>
-                <div class="col col-lg-6 fst-italic" style="color: #ff7369; font-size: 0.85rem;">January 15, 2023 @ 7pm</div>
+                <div class="col col-lg-6 fst-italic" style="color: #ff7369; font-size: 0.85rem;">{{ quote.date_time}}</div>
             </div>
         </div>
     </a>
+    {% endfor %}
     <!-- end of a loop to output each quote-->
+
 </div>
 
-
+{% include 'pagination.html' with collection=results_per_page custom_range=custom_range %}
 
 {% endblock content %}
