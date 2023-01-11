@@ -6,31 +6,35 @@
 {% endblock %}
 
 {% block content %}
-<div class="container p-3">
-    <div class="row">
-        <div class="col-2">image</div>
+<div class="container">
+    <div class="row d-flex align-items-center">
+        <div class="col-2"><img src="{% static 'images/profile_picture.jpg' %}" alt="profile_picture" class="img-fluid"></div>
+        <div class="col-10 text-secondary h3"><i class="bi bi-lightning-charge-fill" style="color: blue;"></i> Getting <span  class="fw-bold" style="color: #ff7369;">inspired!</span></div>
     </div>
 </div>
 
 <form method="POST" enctype="multipart/form-data" class="container p-3">
     {% csrf_token%}
     {% for field in form %}
-        <label for="formInput#text" class="form-label"> {{ field.label }}</label>
+        <label for="formInput#text" class="form-label" style="font-size: 0.85rem;"> {{ field.label }}</label>
         {{ field }}
     {% endfor %}
-    <div class="d-flex justify-content-center">
-        <input type="submit" class="btn my-4 px-4 text-white fs-6 fw-light rounded-pill" value="Submit" style="background-color:#ff7369;"/>
-    </div>
+    <h6>Current Schedule</h6>
+    {% for time_tag in schedule %}
+    <p>{{ time_tag }}</p>
+    {% endfor %}
     
+    <div class="d-flex justify-content-center">
+        <input type="submit" class="btn my-4 px-4 text-white fs-6 fw-light rounded-pill" value="Save" style="background-color:#ff7369;"/>
+    </div>
 </form>
-
+ 
 
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
     config_time = {
-
         enableTime: true,
         minDate: "today",
         dateFormat: "Y-m-d H:i",

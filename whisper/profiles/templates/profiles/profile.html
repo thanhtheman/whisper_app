@@ -10,7 +10,7 @@
             <div class="col-10 text-secondary h2">Hello {{ profile.username }} <i class="bi bi-lightbulb" style="color: #ff7369;"></i></div>
         </div>
         <div class="d-flex flex-row justify-content-center mt-3">
-            <a href="">
+            <a href="{% url 'create-quote' %}">
                 <div class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;">
                     Create
                 </div>
@@ -22,7 +22,7 @@
     </div>
     <!-- We will create a loop to output each quote-->
     {% for quote in results_per_page %}
-    <a href="{% url 'home' %}" class="m-1" style="text-decoration: none;">
+    <a href="{% url 'update-quote' quote.id %}" class="m-1" style="text-decoration: none;">
         <div class="container bg-light border border-danger rounded">
             <div class="row mx-2 mt-2 mb-1">
                 <div class="col-lg-2"></div>

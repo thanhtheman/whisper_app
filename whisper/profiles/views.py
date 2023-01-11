@@ -26,7 +26,7 @@ def profile (request, username):
 def login_user(request):
     page = 'login'
     if request.user.is_authenticated:
-        redirect('profile')
+        redirect('profile', request.user.username)
 
     if request.method == 'POST':
         username = request.POST['username']

@@ -16,7 +16,8 @@ class Quote(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.content
+        display = f'{self.owner} ------ {self.content}'
+        return display
     
     class Meta:
         ordering =['-created']
@@ -28,5 +29,4 @@ class Schedule(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        schedule = f'{self.quote_owner} ----- Delivery: {self.time_tag} '
-        return schedule
+        return self.time_tag
