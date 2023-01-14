@@ -35,7 +35,7 @@ def update_quote (request, pk):
     current_schedule = quote.schedule_set.all()
     form = QuoteForm(instance=quote)
     if request.method == "POST":
-        form = QuoteForm(request.POST, instance=quote)
+        form = QuoteForm(request.POST)
         form.is_valid()
         form.save()
         if request.POST['date_time']:
@@ -43,6 +43,21 @@ def update_quote (request, pk):
             Schedule.objects.create(
                 time_tag = format_date_time(request.POST['date_time']), 
                 quote_owner = quote)
-    context = {'form': form, 'schedule': current_schedule}
+    context = {'form': form, 'schedule': current_schedule, 'quote': quote}
     return render(request, 'quotes/quotes.html', context)
-    
+
+
+@login_required(login_url='login')
+def delete_time_tag(request, pkq, pktt):
+    profile = request.user.profile
+    quote = profile.quote_set.get(id=pkq)
+    time_tag = quote.schedule_set.get(id=pktt)
+    time_tag.delete()
+    return redirect('update-quote', quote.id)
+
+@login_required(login_url='login')
+def delete_quote(request, pk):
+    profile = request.user.profile
+    quote = profile.quote_set.get(id=pk)
+    quote.delete()
+    return redirect('profile', profile.username)

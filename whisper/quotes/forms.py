@@ -12,8 +12,8 @@ class QuoteForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['content'].label = 'Quote'
-        self.fields['date_time'].label = 'Pick Date & Time'
+        self.fields['date_time'].label = 'Pick Date & Time (EST)'
         for name, field in self.fields.items():
-            if field.label == 'Pick Date & Time':
+            if field.label == 'Pick Date & Time (EST)':
                 field.widget.attrs.update({'class': 'form-control form-control-lg mb-1', 'id':'datetimepicker'})
             field.widget.attrs.update({'class': 'form-control mb-1'})

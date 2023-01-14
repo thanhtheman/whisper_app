@@ -10,6 +10,9 @@
             <a href="{% url 'home' %}" class="menu-link">My Account</a> 
         </li>
         <li class="nav-item">
+            <a href="{% url 'profile' user.username %}" class="menu-link">My Profile</a> 
+        </li>
+        <li class="nav-item">
             <a href="{% url 'logout' %}" class="menu-link">Log Out</a> 
         </li>
         {% else %}

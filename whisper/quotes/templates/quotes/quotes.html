@@ -12,28 +12,68 @@
         <div class="col-10 text-secondary h3"><i class="bi bi-lightning-charge-fill" style="color: blue;"></i> Getting <span  class="fw-bold" style="color: #ff7369;">inspired!</span></div>
     </div>
 </div>
-
-<form method="POST" enctype="multipart/form-data" class="container p-3">
+{% if quote.id %}
+<div class="container p-0 d-flex justify-content-end">
+    <button type="button" class="btn btn-outline-danger rounded-pill text-danger text-start me-1" style="font-size: 0.85rem;" data-bs-toggle="modal" data-bs-target="#delete_quote_Modal">
+        <i class="bi bi-trash"></i>Delete
+    </button> 
+    <div class="modal fade" id="delete_quote_Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Quote?</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Deleting this quote will also delete its associated schedule. Are you sure?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+              <a href="{% url 'delete-quote' quote.id %}">
+              <button type="button" class="btn btn-danger">Yes</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endif %}
+<form method="POST" enctype="multipart/form-data" class="container p-1">
     {% csrf_token%}
     {% for field in form %}
         <label for="formInput#text" class="form-label" style="font-size: 0.85rem;"> {{ field.label }}</label>
         {{ field }}
     {% endfor %}
-    <h6>Current Schedule</h6>
+    <h6 class="mt-2" style="font-size: 0.85rem;">Current Schedule</h6>
     {% for time_tag in schedule %}
-    <p>{{ time_tag }}</p>
+    <div class="container bg-light border border-danger rounded">
+        <div class="row mx-2 mt-2 mb-1">
+            <div class="col-lg-2"></div>
+            <div class="col col-lg-6 text-secondary" > 
+                <p>{{ time_tag }}</p>
+            </div>
+            <div class="col-2 col-lg-2">
+                <a href="{% url 'delete-time-tag' quote.id time_tag.id %}">
+                    <i class="bi bi-trash" style="color: red;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
     {% endfor %}
     
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-evenly">
         <input type="submit" class="btn my-4 px-4 text-white fs-6 fw-light rounded-pill" value="Save" style="background-color:#ff7369;"/>
+        <a href="{% url 'profile' user.username %}" class="btn my-4 px-4 text-white fs-6 fw-light rounded-pill" style="background-color:#ff7369;">Back</a>        
     </div>
 </form>
+
  
 
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
+    
     config_time = {
         enableTime: true,
         minDate: "today",

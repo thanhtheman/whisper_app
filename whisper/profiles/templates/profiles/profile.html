@@ -36,10 +36,12 @@
                 </div>
                 <div class="col-2 col-lg-2"><i class="bi bi-pen" style="color: #ff7369;"></i></div>
             </div>
+            {% for time_tag in quote.schedule_set.all %}
             <div class="row my-1 mx-2">
                 <div class="col-lg-2"></div>
-                <div class="col col-lg-6 fst-italic" style="color: #ff7369; font-size: 0.85rem;">{{ quote.date_time}}</div>
+                <div class="col col-lg-6 fst-italic" style="color: #ff7369; font-size: 0.85rem;">{{ time_tag }}</div>
             </div>
+            {% endfor %}
         </div>
     </a>
     {% endfor %}
