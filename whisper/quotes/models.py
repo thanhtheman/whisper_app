@@ -7,7 +7,7 @@ from datetime import datetime
 # Create your models here.
 class Quote(models.Model):
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(Profile, null=True, blank=True, on_delete=models.CASCADE)
     content = models.TextField(max_length=1000, null=True, blank=False)
     author = models.CharField(max_length=200, blank=True, null=True)
     description = models.TextField(max_length=1000, blank=True, null=True)
@@ -30,3 +30,4 @@ class Schedule(models.Model):
 
     def __str__(self):
         return self.time_tag
+

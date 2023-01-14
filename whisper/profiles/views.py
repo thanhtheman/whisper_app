@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, PhoneForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-from .utils import paginating
+from .utils import paginating, convert_phone_number
 
 quotes = {
     'quote': 'The way to get started is to quit talking and start doing.',
@@ -63,3 +63,20 @@ def register_user(request):
             messages.error(request, "An error has occured, please check username & password requirements.")
     context = {'form': form, 'page': page}
     return render(request, 'profiles/login_register.html', context)
+
+@login_required(login_url='login')
+def get_phone_number(request):
+    profile = request.user.profile
+    form = PhoneForm()
+    if request.method == "POST":
+        form = PhoneForm(request.POST)
+        if form.is_valid():
+            phone = form.save(commit=False)
+            phone.phone_owner = profile
+            phone.consent = True
+            phone.save()
+            return redirect('profile', profile.username)
+        else:
+            print(form.errors)
+    context = {'form': form, 'profile': profile }
+    return render(request, 'profiles/phone.html', context)

@@ -21,4 +21,9 @@ def paginating (request, collection, number_of_results_per_page):
         right_index = p.num_pages + 1
     custom_range = range(left_index, right_index)
 
-    return custom_range, results_per_page 
+    return custom_range, results_per_page
+
+def convert_phone_number(phone_number):
+    phone_number = phone_number.replace('-','')
+    phone_number = '+1' + phone_number
+    return phone_number

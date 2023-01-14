@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo">
+        </div>
+    </div>
+  
+    <form action="{% url 'phone' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+            {% for field in form %}
+                <div class="row text-start px-5">
+                    <div class="col-lg-4"></div>
+                    <div class="col-12 col-lg-4">
+                        <label for="formInput#text" class="form-label pt-2 pb-1 ps-2 px-0 m-0" style="font-size: 0.75em"> {{ field.label }} </label>
+                    </div>
+                    <div class="col-lg-4"></div>  
+                </div>
+                <div class="row text-start px-5 d-flex flex-row justify-content-center">
+                    <div class="col-lg-4"></div>
+                    <div class="col-12 col-lg-4">
+                        {{ field }}
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+                {% for error in field.errors %}
+                <p style="color: red;"> {{ error }} </p>
+                {% endfor %}
+            {% endfor %}
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4 text-center py-3">
+                    <p class="text-primary text-wrap rounded-pill px-4" style="font-size: 0.75em;">By submitting your phone number, you consent to receive scheduled text messages from Whisper and we only send your scheduled texts.</p>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4 text-center py-3">
+                    <input type="submit" class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;" value="Submit">
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
