@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = 'django-insecure-f3ckrxv#akg950z6oqz(i27csz@p2*k2$x8n)=d@$=o8q7$swl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,16 +86,7 @@ WSGI_APPLICATION = 'whisper.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'whisper',
-        'USER': 'postgres',
-        'PASSWORD': 'OhYeah123',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+
 
 
 # Password validation
