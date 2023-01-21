@@ -2,10 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Schedule
 from .forms import QuoteForm
 from django.contrib.auth.decorators import login_required
-from .utils import format_date_time
-
-
-# Create your views here.
+from .utils import format_date_time, check_phone_number, add_time_tags
 
 @login_required(login_url='login')
 def create_quote (request): 
@@ -22,10 +19,19 @@ def create_quote (request):
                 Schedule.objects.create(
                     time_tag = format_date_time(request.POST['date_time']), 
                     quote_owner = quote)
+                add_time_tags(profile)
             return redirect('profile', profile.username)
         else:
-            print(form.errors)  
-    context = {'form': form}
+            print(form.errors)
+    if check_phone_number(profile) == True:
+        try:
+            phone = profile.phone_set.all()
+            phone_number = phone[0].phone_number
+            context = {'form': form, 'phone_number': phone_number}
+        except Exception:
+            print(Exception)
+    else:
+        context = {'form': form}
     return render(request, 'quotes/quotes.html', context)
 
 @login_required(login_url='login')
@@ -43,9 +49,17 @@ def update_quote (request, pk):
             Schedule.objects.create(
                 time_tag = format_date_time(request.POST['date_time']), 
                 quote_owner = quote)
-    context = {'form': form, 'schedule': current_schedule, 'quote': quote}
+            add_time_tags(profile)
+    if check_phone_number(profile) == True:
+        try:
+            phone = profile.phone_set.all()
+            phone_number = phone[0].phone_number
+            context = {'form': form, 'schedule': current_schedule, 'quote': quote, 'phone_number': phone_number}
+        except Exception:
+            print(Exception)
+    else:
+        context = {'form': form, 'schedule': current_schedule, 'quote': quote}
     return render(request, 'quotes/quotes.html', context)
-
 
 @login_required(login_url='login')
 def delete_time_tag(request, pkq, pktt):

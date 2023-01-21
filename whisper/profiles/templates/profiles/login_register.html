@@ -45,7 +45,7 @@
             <h6 class="fs6">Already have an account?</h6>
             <div class="d-flex flex-row justify-content-evenly">
                 <a href="{% url 'login' %}" style="text-decoration: none; color:#ff7369">Log In</a>
-                <a href="{% url 'login' %}" style="text-decoration: none; color: #ff7369;">Forget Password?</a>
+                <a href="{% url 'reset_password' %}" style="text-decoration: none; color: #ff7369;">Forget Password?</a>
             </div>
         </div>
         <div class="col-lg-4"></div>
@@ -104,8 +104,9 @@
         <div class="col-lg-4"></div>
         <div class="col-12 col-lg-4 text-center py-2">
             <h6 class="fs6">Don't have an account?</h6>
-            <div class="d-flex flex-row justify-content-center">
+            <div class="d-flex flex-row justify-content-evenly">
                 <a href="{% url 'user_registration' %}" style="text-decoration: none; color:#ff7369">Register Now</a>
+                <a href="{% url 'reset_password' %}" style="text-decoration: none; color: #ff7369;">Forget Password?</a>
             </div>
         </div>
         <div class="col-lg-4"></div>

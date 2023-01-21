@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+    ul li {
+        font-size: 0.75em;
+        list-style-type: square;
+        list-style-position: outside;
+        text-align: left;
+    }
+
+    p {
+        font-size: 0.75em;
+    }
+</style>
+<div class="container">
+    <div class="row text-start px-5">
+        <div class="col-lg-4"></div>
+        <div class="col-12 col-lg-4">
+            <h6 class="form-label pt-2 pb-1 ps-2 px-0 m-0 text-center" style="color:#ff7369">Enter New Password</h6>
+        </div>
+        <div class="col-lg-4"></div>  
+    </div>
+    <div class="row text-start px-5">
+        <div class="col-lg-4"></div>
+        <div class="col-12 col-lg-4">
+            <p class="form-label pt-2 pb-1 ps-2 px-0 m-0 text-center" style="font-size: 0.75em">Please enter your new password twice so we can verify you typed it correctly.</p>
+        </div>
+        <div class="col-lg-4"></div>  
+    </div>
+    <div class="row text-start px-5 my-3">
+        <div class="col-lg-4"></div>
+        <div class="col-12 col-lg-4">
+            <form class="form-control text-center" method="POST">
+                {% csrf_token%}
+                {{ form.as_p }}    
+                <div class="d-flex justify-content-center">
+                    <input class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;" type="Submit">
+                </div>
+            </form>
+            
+        </div>
+        <div class="col-lg-4"></div>  
+    </div>
+</div>
+
+{% endblock content %}

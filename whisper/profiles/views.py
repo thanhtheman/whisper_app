@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .utils import paginating, convert_phone_number
+from quotes.utils import check_phone_number, add_time_tags
 
 quotes = {
     'quote': 'The way to get started is to quit talking and start doing.',
@@ -19,8 +20,9 @@ def home(request):
 def profile (request, username):
     profile = Profile.objects.get(username=username)
     quotes = profile.quote_set.all()
+    phone_available = check_phone_number(profile)
     custom_range, results_per_page = paginating(request, quotes, 3)
-    context = {'profile': profile, 'results_per_page': results_per_page, 'custom_range': custom_range}
+    context = {'profile': profile, 'results_per_page': results_per_page, 'custom_range': custom_range, 'phone_available': phone_available}
     return render(request, 'profiles/profile.html', context)
 
 def login_user(request):

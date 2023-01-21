@@ -3,6 +3,11 @@
 
 {% block content %}
 
+{% if phone_available == Null %}
+<a href="{% url 'phone' %}" class="text-danger text-center mx-3 mt-2 d-flex justify-content-center" style="font-size: 0.85rem;" data-bs-toggle="modal" data-bs-target="#delete_quote_Modal">
+    <i class="bi bi-phone-vibrate-fill"></i><p style="font-size: 0.75rem;">Please add phone number so that we can deliver your scheduled messages!</p>
+</a> 
+{% endif %}
 <div class="container">
     <div class="container">
         <div class="row d-flex align-items-center">
