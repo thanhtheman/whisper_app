@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-f3ckrxv#akg950z6oqz(i27csz@p2*k2$x8n)=d@$=o8q7$swl'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,14 +88,20 @@ WSGI_APPLICATION = 'whisper.wsgi.application'
 #     }
 # }
 
+postgres_name = os.getenv('POSTGRES_NAME')
+postgres_user = os.getenv('POSTGRES_USER')
+postgres_host = os.getenv('POSTGRES_HOST')
+postgres_password = os.getenv('POSTGRES_PASSWORD')
+postgres_port = os.getenv('POSTGRES_PORT')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'whisper',
-        'USER': 'postgres',
-        'PASSWORD': 'OhYeah123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': postgres_name,
+        'USER': postgres_user,
+        'PASSWORD': postgres_password,
+        'HOST': postgres_host,
+        'PORT': postgres_port,
     }
 }
 
