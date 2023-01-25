@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-from .utils import paginating, convert_phone_number
+from .utils import paginating, convert_phone_number, create_sms_phone_number, verify_sms_phone_number
 from quotes.utils import check_phone_number, add_time_tags
 
 quotes = {
@@ -73,12 +73,33 @@ def get_phone_number(request):
     if request.method == "POST":
         form = PhoneForm(request.POST)
         if form.is_valid():
+            phone_number = request.POST['phone_number']
+            create_sms_phone_number(phone_number)
             phone = form.save(commit=False)
             phone.phone_owner = profile
             phone.consent = True
             phone.save()
-            return redirect('profile', profile.username)
+            return redirect('phone')
         else:
             print(form.errors)
     context = {'form': form, 'profile': profile }
     return render(request, 'profiles/phone.html', context)
+
+
+
+# @login_required(login_url='login')
+# def get_phone_number(request):
+#     profile = request.user.profile
+#     form = PhoneForm()
+#     if request.method == "POST":
+#         form = PhoneForm(request.POST)
+#         if form.is_valid():
+#             phone = form.save(commit=False)
+#             phone.phone_owner = profile
+#             phone.consent = True
+#             phone.save()
+#             return redirect('profile', profile.username)
+#         else:
+#             print(form.errors)
+#     context = {'form': form, 'profile': profile }
+#     return render(request, 'profiles/phone.html', context)

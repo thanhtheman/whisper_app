@@ -136,14 +136,20 @@ USE_I18N = True
 
 USE_TZ = True
 
+email_backend = os.getenv('EMAIL_BACKEND')
+email_host = os.getenv('EMAIL_HOST')
+email_port = os.getenv('EMAIL_PORT')
+email_host_username = os.getenv('EMAIL_HOST_USER')
+email_host_password = os.getenv('EMAIL_HOST_PASSWORD')
 
 #email configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
+EMAIL_BACKEND = email_backend
+EMAIL_HOST = email_host
+EMAIL_PORT = email_port
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'whisperapplication@gmail.com'
-EMAIL_HOST_PASSWORD = 'dcyacewqocniabif'
+EMAIL_HOST_USER = email_host_username
+EMAIL_HOST_PASSWORD = email_host_password
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
