@@ -31,16 +31,51 @@ def convert_phone_number(phone_number):
 
 def create_sms_phone_number(phone_number):
     sns_client = boto3.client('sns')
-    response = sns_client.create_sms_sandbox_phone_number(
-        PhoneNumber=phone_number,
-        LanguageCode='en-US'
-    )
-    print("A new phone number has been added: \n" + response)
+    error = ''
+    try:
+        response = sns_client.create_sms_sandbox_phone_number(
+            PhoneNumber=phone_number,
+            LanguageCode='en-US'
+        )
+    except(
+        sns_client.exceptions.AuthorizationErrorException,
+        sns_client.exceptions.InternalErrorException,
+        sns_client.exceptions.InvalidParameterException,
+        sns_client.exceptions.OptedOutException,
+        sns_client.exceptions.UserErrorException,
+        sns_client.exceptions.ThrottledException,
+    ) as e:
+        print(e)
+        error = e
+    if error != '':
+        return 'There is an error, please check your phone number again!'
+    else:
+        print(response)
+        return 'Your phone number has been successfully submitted.'
 
 def verify_sms_phone_number(phone_number, one_time_passcode):
     sns_client=boto3.client('sns')
-    response = sns_client.verify_sms_sandbox_phone_number(
-        PhoneNumber=phone_number,
-        OneTimePasscode=one_time_passcode
-    )
-    print("Phone Number is successfully verified! \n" + response)
+    error = ''
+    try:
+       response = sns_client.verify_sms_sandbox_phone_number(
+            PhoneNumber=phone_number,
+            OneTimePassword=one_time_passcode
+        )
+    except (sns_client.exceptions.AuthorizationErrorException,
+        sns_client.exceptions.InternalErrorException,
+        sns_client.exceptions.InvalidParameterException,
+        sns_client.exceptions.ResourceNotFoundException,
+        sns_client.exceptions.VerificationException,
+        sns_client.exceptions.ThrottledException,
+    ) as e:
+        print(e)
+        error = e
+    if error != '':
+        return 'There is an error, please check your passcode again!'
+    else:
+        print(response)
+        return 'Your phone number has been successfully verified.'
+
+
+
+    

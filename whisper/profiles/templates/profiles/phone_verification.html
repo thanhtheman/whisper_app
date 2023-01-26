@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo">
+        </div>
+    </div>
+  
+    <form action="{% url 'phone_verification' %}" method="POST">
+        {% csrf_token %}
+        <div class="container">
+                <div class="row text-start px-5">
+                    <div class="col-lg-4"></div>
+                    <div class="col-12 col-lg-4">
+                        <label for="formInput#text" class="form-label pt-2 pb-1 ps-2 px-0 m-0" style="font-size: 0.75em"> One-time passcode </label>
+                    </div>
+                    <div class="col-lg-4"></div>  
+                </div>
+                <div class="row text-start px-5 d-flex flex-row justify-content-center">
+                    <div class="col-lg-4"></div>
+                    <div class="col-12 col-lg-4">
+                        <input type="number" class="form-control mb-1 bg-light rounded-pill form-control px-0.5 text-dark" style="font-size: 0.75em;" name="passcode">
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4 text-center py-3">
+                    <p class="text-primary text-wrap rounded-pill px-4" style="font-size: 0.75em;">A one-time passcode has been sent to your phone (which might take up to a few minutes).<br>Please input your one-time passcode to verify your phone number.</p>
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-12 col-lg-4 text-center py-3">
+                    <input type="submit" class="btn text-white text-nowrap rounded-pill px-4" style="background-color: #ff7369;" value="Submit">
+                </div>
+                <div class="col-lg-4"></div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

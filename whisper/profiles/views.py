@@ -7,6 +7,7 @@ from .models import Profile
 from .utils import paginating, convert_phone_number, create_sms_phone_number, verify_sms_phone_number
 from quotes.utils import check_phone_number, add_time_tags
 
+
 quotes = {
     'quote': 'The way to get started is to quit talking and start doing.',
     'author': 'Walt Disney'
@@ -73,19 +74,38 @@ def get_phone_number(request):
     if request.method == "POST":
         form = PhoneForm(request.POST)
         if form.is_valid():
-            phone_number = request.POST['phone_number']
-            create_sms_phone_number(phone_number)
-            phone = form.save(commit=False)
-            phone.phone_owner = profile
-            phone.consent = True
-            phone.save()
-            return redirect('phone')
+            phone_number = convert_phone_number(request.POST['phone_number'])
+            response = create_sms_phone_number(phone_number)
+            if response == 'There is an error, please check your phone number again!':
+                messages.info(request, f'{response}')
+                return redirect('phone')
+            else:
+                phone = form.save(commit=False)
+                phone.phone_owner = profile
+                phone.consent = True
+                phone.save()
+                messages.success(request, f'{response}')
+                return redirect('phone_verification')
         else:
             print(form.errors)
     context = {'form': form, 'profile': profile }
     return render(request, 'profiles/phone.html', context)
 
-
+@login_required(login_url='login')
+def verify_phone_number(request):
+    profile = request.user.profile
+    user_phone = profile.phone_set.get(phone_owner=profile)
+    user_phone_number = convert_phone_number(user_phone.phone_number)
+    if request.method == "POST":
+        one_time_passcode = request.POST['passcode']
+        response = verify_sms_phone_number(user_phone_number, one_time_passcode)
+        if response == 'There is an error, please check your passcode again!':
+            messages.info(request, f'{response}')
+            return redirect('phone_verification')
+        else:
+            messages.success(request, f'{response}')
+            return redirect('profile', request.user.username)
+    return render(request, 'profiles/phone_verification.html')
 
 # @login_required(login_url='login')
 # def get_phone_number(request):
