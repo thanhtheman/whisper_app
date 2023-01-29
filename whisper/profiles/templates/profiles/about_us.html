@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-block align-items-center">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 text-center">
+            <div class="wrapper">
+                <div class="static-txt">Why do we build </div>
+                <div class="dynamic-txts"><span class="fw-bold ms-1">Whisper?</span></div> 
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    <div class="row p-2 d-flex flex-row justify-content-center align-items-center ">
+        <div class="col-lg-3"></div>
+        <div class="col-12 col-lg-6">
+            <p class="text-secondary text-wrap m-0 text-center" style="font-size: 0.85rem;">Building a new habit is all about daily repetition. Daily repetition needs reminders and inspirations.<br><br>The problem is the world is a noisy place with distractions such as social media. This makes a simple action of opening your notebook or laptop to review your commitment is extremely difficult. That's how you lose track of your commitment.<br><br>The solution is a simple text message that reminds you exactly what you need to do everyday.</p>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 text-center">
+            <div class="wrapper">
+                <div class="static-txt">How to get</div>
+                <div class="dynamic-txts"><span class="fw-bold ms-1">started?</span></div> 
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+
+    <div class="row p-2 d-flex flex-row justify-content-center align-items-center ">
+        <div class="col-lg-3"></div>
+        <div class="col-12 col-lg-6">
+            <p class="text-secondary text-wrap m-0 text-center" style="font-size: 0.85rem;">Start small and start NOW.<br><br>Sign up Whisper for free, creating your goals or an inspiring quote/video that prompt you take actions.<br><br>Set specific time that you want Whisper to send you those text messages. The first 30 messages are free!</p>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+
+
+    
+    <div class="row pt-2 pb-4">
+        <div class="col-3"></div>
+        <div class="col-6 text-center">
+            <a href="{% url 'user_registration' %}" class="btn text-white text-nowrap rounded-pill" style="background-color: #ff7369;">
+                <p class="fs-6 fw-light fst-italic m-0">Try Whisper Free</p>
+            </a>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+
+    
+    <div class="row p-2 d-flex flex-row justify-content-center align-items-center ">
+        <div class="col-lg-3"></div>
+        <div class="col-12 col-lg-6">
+            <div class="wrapper">
+                <div class="dynamic-txts"><span><i class="bi bi-chat-right-dots"></i>.............................<i class="bi bi-check-square"></i></span></div>
+            </div> 
+            <p class="text-secondary text-start m-0" style="font-size: 0.85rem;">
+               <span style="color: #ff7369;" class="fw-bold">Questions?</span> Please email us at: whisperapplication@gmail.com 
+            </p>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+
+
+
+{% endblock %}

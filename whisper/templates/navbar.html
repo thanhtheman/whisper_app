@@ -3,12 +3,9 @@
     <a href="{% url 'home' %}"><img src="{% static 'dev_images/logo_whisper.svg' %}" alt="logo" class="logo"></a>
     <ul class="nav-menu">
         <li class="nav-item">
-           <a href="#" class="menu-link">About Whisper</a> 
+            <a href="{% url 'about_us' %}" class="menu-link">About Whisper</a> 
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a href="{% url 'home' %}" class="menu-link">My Account</a> 
-        </li>
         <li class="nav-item">
             <a href="{% url 'profile' user.username %}" class="menu-link">My Profile</a> 
         </li>
@@ -21,7 +18,7 @@
         </li>
         {% endif %}
         <li class="nav-item">
-            <a href="#" class="menu-link">Contact</a> 
+            <a href="{% url 'about_us' %}" class="menu-link">Contact</a> 
         </li>        
     </ul>
 

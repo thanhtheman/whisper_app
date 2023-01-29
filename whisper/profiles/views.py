@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .utils import paginating, convert_phone_number, create_sms_phone_number, verify_sms_phone_number
-from quotes.utils import check_phone_number, add_time_tags
+from quotes.utils import check_phone_number
 
 
 quotes = {
@@ -16,6 +16,9 @@ quotes = {
 def home(request):
     context = quotes
     return render(request, 'profiles/home.html', context)
+
+def about_us(request):
+    return render(request, 'profiles/about_us.html')
 
 @login_required(login_url='login')
 def profile (request, username):
@@ -106,20 +109,3 @@ def verify_phone_number(request):
             messages.success(request, f'{response}')
             return redirect('profile', request.user.username)
     return render(request, 'profiles/phone_verification.html')
-
-# @login_required(login_url='login')
-# def get_phone_number(request):
-#     profile = request.user.profile
-#     form = PhoneForm()
-#     if request.method == "POST":
-#         form = PhoneForm(request.POST)
-#         if form.is_valid():
-#             phone = form.save(commit=False)
-#             phone.phone_owner = profile
-#             phone.consent = True
-#             phone.save()
-#             return redirect('profile', profile.username)
-#         else:
-#             print(form.errors)
-#     context = {'form': form, 'profile': profile }
-#     return render(request, 'profiles/phone.html', context)

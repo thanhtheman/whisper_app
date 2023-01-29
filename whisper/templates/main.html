@@ -23,8 +23,8 @@
     {% if messages %}
     {% for message in messages %}
         <div class="d-flex justify-content-center align-items-center">
-            <p id="alert" class="alert alert-light" style="color: blue;">{{ message }}</p>
-            <button class="btn bg-primary-emphasis mb-3" id="alert__close"><i class="bi bi-x text-white"></i></button>
+            <p id="alert" class="alert alert-light p-1" style="color: blue; font-size: 1em;">{{ message }}</p>
+            <button class="btn btn-outline-primary mb-3" id="alert__close"><i class="bi bi-x text-primary"></i></button>
         </div>
     {% endfor %}
     {% endif %}
