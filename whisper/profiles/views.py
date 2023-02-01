@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 from .utils import paginating, convert_phone_number, create_sms_phone_number, verify_sms_phone_number
-from quotes.utils import check_phone_number
+from quotes.utils import check_phone_number, first_time_add_time_tags_dynamodb
 
 
 quotes = {
@@ -64,7 +64,7 @@ def register_user(request):
             user.save()
             messages.success(request, 'Your account has been successfully created!')
             login(request, user)
-            return redirect('home')
+            return redirect('profile', user.username)
         else:
             messages.error(request, "An error has occured, please check username & password requirements.")
     context = {'form': form, 'page': page}
@@ -107,5 +107,6 @@ def verify_phone_number(request):
             return redirect('phone_verification')
         else:
             messages.success(request, f'{response}')
+            first_time_add_time_tags_dynamodb(profile)
             return redirect('profile', request.user.username)
     return render(request, 'profiles/phone_verification.html')

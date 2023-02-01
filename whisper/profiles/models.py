@@ -10,7 +10,7 @@ class Profile(models.Model):
     username = models.CharField(max_length=200, blank=True, null=True)
     email = models.EmailField(max_length=200, blank=True, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
-    profile_image = models.ImageField(blank=True, null=True, upload_to='images/', default='dev_images/message.svg')
+    profile_image = models.ImageField(blank=True, null=True, upload_to="images/", default="images/default_profile_img.png")
     headline = models.CharField(max_length=200, blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 

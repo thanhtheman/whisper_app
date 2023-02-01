@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'profiles.apps.ProfilesConfig',
     'quotes.apps.QuotesConfig',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,27 @@ EMAIL_PORT = email_port
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = email_host_username
 EMAIL_HOST_PASSWORD = email_host_password
+
+'''
+#AWS S3
+aws_access_key = os.getenv('AWS_ACCESS_KEY_ID')
+aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+aws_storage_bucket_name = os.getenv('AWS_STORAGE_BUCKET_NAME')
+default_file_storage = os.getenv('DEFAULT_FILE_STORAGE')
+staticfiles_storage = os.getenv('STATICFILES_STORAGE')
+
+AWS_ACCESS_KEY_ID = aws_access_key
+
+AWS_SECRET_ACCESS_KEY = aws_secret_access_key
+
+AWS_STORAGE_BUCKET_NAME = aws_storage_bucket_name
+
+DEFAULT_FILE_STORAGE = default_file_storage
+STATICFILES_STORAGE = staticfiles_storage
+
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' 
+AWS_S3_FILE_OVERWRITE = False
+'''
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,5 +1,5 @@
 {% extends 'main.html' %}
-{% load static %}
+<!-- {% load static %} -->
 {% block extrahead %}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_red.css">
@@ -8,7 +8,8 @@
 {% block content %}
 <div class="container">
     <div class="row d-flex align-items-center">
-        <div class="col-2"><img src="{% static 'images/profile_picture.jpg' %}" alt="profile_picture" class="img-fluid"></div>
+        <div class="col-2"><img src="{{ profile.profile_image.url }}" alt="profile_picture" class="img-fluid"></div>
+        <!-- <div class="col-2">{{ profile.username }}</div> -->
         <div class="col-10 text-secondary h3"><i class="bi bi-lightning-charge-fill" style="color: blue;"></i> My <span  class="fw-bold" style="color: #ff7369;">Quote</span></div>
     </div>
 </div>
