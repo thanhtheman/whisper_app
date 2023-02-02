@@ -89,6 +89,8 @@ WSGI_APPLICATION = 'whisper.wsgi.application'
 #     }
 # }
 
+# Local PostreSQL
+'''
 postgres_name = os.getenv('POSTGRES_NAME')
 postgres_user = os.getenv('POSTGRES_USER')
 postgres_host = os.getenv('POSTGRES_HOST')
@@ -103,6 +105,25 @@ DATABASES = {
         'PASSWORD': postgres_password,
         'HOST': postgres_host,
         'PORT': postgres_port,
+    }
+}
+'''
+
+# AWS RDS PostgreSQL
+aws_postgres_name = os.getenv('AWS_POSTGRES_NAME')
+aws_postgres_user = os.getenv('AWS_POSTGRES_USER')
+aws_postgres_host = os.getenv('AWS_POSTGRES_HOST')
+aws_postgres_password = os.getenv('AWS_POSTGRES_PASSWORD')
+aws_postgres_port = os.getenv('AWS_POSTGRES_PORT')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': aws_postgres_name,
+        'USER': aws_postgres_user,
+        'PASSWORD': aws_postgres_password,
+        'HOST': aws_postgres_host,
+        'PORT': aws_postgres_port,
     }
 }
 
@@ -151,8 +172,8 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = email_host_username
 EMAIL_HOST_PASSWORD = email_host_password
 
-'''
-#AWS S3
+
+#AWS S3 Configuration
 aws_access_key = os.getenv('AWS_ACCESS_KEY_ID')
 aws_secret_access_key = os.getenv('AWS_SECRET_ACCESS_KEY')
 aws_storage_bucket_name = os.getenv('AWS_STORAGE_BUCKET_NAME')
@@ -170,7 +191,7 @@ STATICFILES_STORAGE = staticfiles_storage
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com' 
 AWS_S3_FILE_OVERWRITE = False
-'''
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -186,6 +207,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
+
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
