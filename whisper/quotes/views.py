@@ -3,7 +3,7 @@ from .models import Schedule
 from .forms import QuoteForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .utils import format_date_time, check_phone_number, add_time_tag_dynamodb
+from .utils import format_date_time, check_phone_number, add_time_tag_dynamodb, delete_time_tag_dynamodb
 
 @login_required(login_url='login')
 def create_quote (request): 
@@ -76,6 +76,7 @@ def delete_time_tag(request, pkq, pktt):
     quote = profile.quote_set.get(id=pkq)
     time_tag = quote.schedule_set.get(id=pktt)
     time_tag.delete()
+    delete_time_tag_dynamodb(profile, pktt)
     return redirect('update-quote', quote.id)
 
 @login_required(login_url='login')

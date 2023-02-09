@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    volumes:
+      - .:/whisper
+    ports:
+      - 8000:8000
+    image: app:whisper
+    container_name: whisper_container
+    command: gunicorn whisper.wsgi:application --bind 0.0.0.0:8000
+  
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    image: rp:nginx
+    links:
+      - app

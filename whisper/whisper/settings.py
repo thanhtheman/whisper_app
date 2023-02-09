@@ -27,9 +27,17 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.littlewhisperapp.com', 'littlewhisperapp.com', 'localhost', '127.0.0.1', '*']
 
-ALLOWED_HOSTS = []
+#CSRF trusted origin for submitting forms
+CSRF_TRUSTED_ORIGINS = ['https://www.littlewhisperapp.com']
 
+# Allows SSL Header with HTTPS for communicating with our NginX web server
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+#Allow Dynamic IP Address from EC2 and validate the "*"
+ALLOWED_CIDR_NETS = ['172.17.0.0/16']
 
 # Application definition
 
@@ -46,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'allow_cidr.middleware.AllowCIDRMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

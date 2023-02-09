@@ -5,6 +5,10 @@ from dotenv import load_dotenv
 load_dotenv()
 from profiles.utils import convert_phone_number
 
+key_id = os.getenv('AWS_ACCESS_KEY_ID')
+secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+region = os.getenv('REGION_NAME')
+
 def format_date_time(date_time):
     date, time = date_time.split(' ')
     hour, minute = time.split(':')
@@ -46,10 +50,12 @@ def first_time_add_time_tags_dynamodb(profile):
 def add_time_tag_dynamodb(profile, time_tag_id, format_time_tag, quote_content):
     try:
         if check_phone_number(profile) == True:
+            print(check_phone_number(profile))
             phone = profile.phone_set.all()
             phone_number = phone[0].phone_number
             format_phone_number = convert_phone_number(phone_number)
-            dynamodb_client = boto3.client('dynamodb')
+            dynamodb_client = boto3.client('dynamodb', aws_access_key_id=key_id, 
+            aws_secret_access_key=secret_key, region_name=region)
             table_name = os.getenv('DYNAMODB_TABLE_NAME')
             response = dynamodb_client.put_item(
                 TableName= table_name,
@@ -59,6 +65,31 @@ def add_time_tag_dynamodb(profile, time_tag_id, format_time_tag, quote_content):
                     'phone_number':{'S':format_phone_number},
                     'format_time_tag':{'S': format_time_tag},
                     'quote_message': {'S': quote_content},
+                }
+            )
+            print(response)
+    except (dynamodb_client.exceptions.ConditionalCheckFailedException,
+            dynamodb_client.exceptions.ProvisionedThroughputExceededException,
+            dynamodb_client.exceptions.ResourceNotFoundException,
+            dynamodb_client.exceptions.ItemCollectionSizeLimitExceededException,
+            dynamodb_client.exceptions.TransactionConflictException,
+            dynamodb_client.exceptions.RequestLimitExceeded,
+            dynamodb_client.exceptions.InternalServerError) as e:
+        print(e)
+
+
+def delete_time_tag_dynamodb(profile, time_tag_id):
+    try:
+        if check_phone_number(profile) == True:
+            print(check_phone_number(profile))
+            print(time_tag_id)
+            dynamodb_client = boto3.client('dynamodb', aws_access_key_id=key_id, 
+            aws_secret_access_key=secret_key, region_name=region)
+            table_name = os.getenv('DYNAMODB_TABLE_NAME')
+            response = dynamodb_client.delete_item(
+                TableName= table_name,
+                Key={
+                    'time_tag_id': {'S': time_tag_id},
                 }
             )
             print(response)

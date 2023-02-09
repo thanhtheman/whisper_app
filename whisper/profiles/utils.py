@@ -1,5 +1,11 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import boto3
+import os
+from dotenv import load_dotenv
+load_dotenv()
+key_id = os.getenv('AWS_ACCESS_KEY_ID')
+secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
+region = os.getenv('REGION_NAME')
 
 def paginating (request, collection, number_of_results_per_page):
     page = request.GET.get('page')
@@ -30,7 +36,8 @@ def convert_phone_number(phone_number):
     return phone_number
 
 def create_sms_phone_number(phone_number):
-    sns_client = boto3.client('sns')
+    sns_client = boto3.client('sns',aws_access_key_id=key_id, 
+    aws_secret_access_key=secret_key, region_name=region)
     error = ''
     try:
         response = sns_client.create_sms_sandbox_phone_number(
@@ -54,7 +61,8 @@ def create_sms_phone_number(phone_number):
         return 'Your phone number has been successfully submitted.'
 
 def verify_sms_phone_number(phone_number, one_time_passcode):
-    sns_client=boto3.client('sns')
+    sns_client=boto3.client('sns', aws_access_key_id=key_id, 
+    aws_secret_access_key=secret_key, region_name=region)
     error = ''
     try:
        response = sns_client.verify_sms_sandbox_phone_number(
@@ -76,6 +84,20 @@ def verify_sms_phone_number(phone_number, one_time_passcode):
         print(response)
         return 'Your phone number has been successfully verified.'
 
-
+def subscribe_to_topic(phone_number):
+    sns_client=boto3.client('sns', aws_access_key_id=key_id, 
+    aws_secret_access_key=secret_key, region_name=region)
+    try:
+        response = sns_client.subscribe(TopicArn='arn:aws:sns:us-east-1:941349218315:Whisper', Protocol='sms', Endpoint=phone_number)
+        print(f'{phone_number} was successfully subscribed.')
+    except(
+        sns_client.exceptions.SubscriptionLimitExceededException,
+        sns_client.exceptions.FilterPolicyLimitExceededException,
+        sns_client.exceptions.InvalidParameterException,
+        sns_client.exceptions.InternalErrorException,
+        sns_client.exceptions.NotFoundException,
+        sns_client.exceptions.AuthorizationErrorException,
+        sns_client.exceptions.InvalidSecurityException) as e:
+            print(e)
 
     

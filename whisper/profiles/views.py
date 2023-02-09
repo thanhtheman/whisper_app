@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-from .utils import paginating, convert_phone_number, create_sms_phone_number, verify_sms_phone_number
+from .utils import paginating, convert_phone_number, create_sms_phone_number, verify_sms_phone_number, subscribe_to_topic
 from quotes.utils import check_phone_number, first_time_add_time_tags_dynamodb
 
 
@@ -107,6 +107,7 @@ def verify_phone_number(request):
             return redirect('phone_verification')
         else:
             messages.success(request, f'{response}')
+            subscribe_to_topic(user_phone_number)
             first_time_add_time_tags_dynamodb(profile)
             return redirect('profile', request.user.username)
     return render(request, 'profiles/phone_verification.html')
